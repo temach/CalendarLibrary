@@ -226,6 +226,36 @@ public class YearView extends LinearLayout implements MonthViewClickListeners {
         headerLayout.setBackgroundColor(headerBackgroundColor);
     }
 
+    public MonthView getMonthView(int month) {
+        switch (month) {
+            case 0:
+                return jan;
+            case 1:
+                return feb;
+            case 2:
+                return march;
+            case 3:
+                return april;
+            case 4:
+                return may;
+            case 5:
+                return june;
+            case 6:
+                return july;
+            case 7:
+                return aug;
+            case 8:
+                return sept;
+            case 9:
+                return oct;
+            case 10:
+                return nov;
+            case 11:
+                return dec;
+            default:
+                return null;
+        }
+    }
 
     private void settingUpMonthsOfTheYear(){
         jan.setPreviousButtonVisibility(View.GONE);
