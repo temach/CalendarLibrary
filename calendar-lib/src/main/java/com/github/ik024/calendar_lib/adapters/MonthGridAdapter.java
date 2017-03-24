@@ -133,6 +133,8 @@ public class MonthGridAdapter extends BaseAdapter {
                 }else{
                     Date date = getDate(mDisplayYear, mDisplayMonth, Integer.parseInt(item));
                     if(mEventList.contains(date)){
+                        // GradientDrawable gd = (GradientDrawable) mHolder.tvCalendarMonthDay.getBackground().getCurrent();
+                        // gd.setColor(Color.parseColor("#000000"));
                         mHolder.tvCalendarMonthDay.setBackgroundResource(R.drawable.textview_background_event);
                         mHolder.tvCalendarMonthDay.setTextColor(Color.WHITE);
                     }else{
@@ -177,6 +179,24 @@ public class MonthGridAdapter extends BaseAdapter {
      */
     public void setEventList(List<Date> eventList){
         mEventList = eventList;
+        notifyDataSetChanged();
+    }
+
+    /**
+     * This method returns unmodifiable list reference
+     * to the event list for the calendar
+     */
+    public List<Data> getEventList() {
+        return Collections.unmodifiableList(mEventList);
+    }
+
+    /**
+     * This method extends the event list with new events
+     *
+     * @param eventList List of dates
+     */
+    public void extendEventList(List<Date> eventList){
+        mEventList.addAll(eventList);
         notifyDataSetChanged();
     }
 
