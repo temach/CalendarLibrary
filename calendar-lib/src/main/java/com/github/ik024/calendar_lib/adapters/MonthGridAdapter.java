@@ -186,7 +186,7 @@ public class MonthGridAdapter extends BaseAdapter {
      * This method returns unmodifiable list reference
      * to the event list for the calendar
      */
-    public List<Data> getEventList() {
+    public List<Date> getEventList() {
         return Collections.unmodifiableList(mEventList);
     }
 
