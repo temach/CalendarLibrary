@@ -255,11 +255,11 @@ public class MonthGridAdapter extends BaseAdapter {
             tvCalendarWeekDayName = (AutoResizeTextView) view.findViewById(R.id.row_cm_tv_week_day_name);
             tvCalendarMonthDay = (AutoResizeTextView) view.findViewById(R.id.row_cm_tv_day);
             if(isMonthView){
-                tvCalendarMonthDay.setMinTextSize(35);
-                tvCalendarWeekDayName.setMinTextSize(35);
-            }else{
                 tvCalendarMonthDay.setMinTextSize(25);
                 tvCalendarWeekDayName.setMinTextSize(25);
+            }else{
+                tvCalendarMonthDay.setMinTextSize(15);
+                tvCalendarWeekDayName.setMinTextSize(15);
             }
         }
     }
