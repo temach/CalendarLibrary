@@ -17,6 +17,7 @@
         android:id="@+id/year_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hideYearHeader="true"
         app:currentDayTextColorYV="@color/colorPrimaryDark"
         app:daysOfWeekTextColorYV="@android:color/black"
         app:daysOfMonthTextColorYV="@android:color/darker_gray"

@@ -52,8 +52,10 @@ public class YearView extends LinearLayout implements MonthViewClickListeners {
 
     private void init(Context context, AttributeSet attrs){
         mContext = context;
+        boolean hideYearHeader = false;
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.YearView);
+            hideYearHeader = typedArray.getBoolean(R.styleable.YearView_hideYearHeader, false);
             currentDayTextColor = typedArray.getColor(R.styleable.YearView_currentDayTextColorYV,
                     ContextCompat.getColor(context, R.color.colorAccent));
             daysOfMonthTextColor = typedArray.getColor(R.styleable.YearView_daysOfMonthTextColorYV,
@@ -107,6 +109,9 @@ public class YearView extends LinearLayout implements MonthViewClickListeners {
         ivRightArrow = (ImageView) view.findViewById(R.id.iv_year_view_right);
 
         headerLayout = (RelativeLayout) view.findViewById(R.id.rl_year_view_header);
+        if (hideYearHeader) {
+            headerLayout.removeAllViews();
+        }
         calendarLayout = (ScrollView) view.findViewById(R.id.sv_year_view_calendar_background);
 
         ivLeftArrow.setBackground(mLeftArrowDrawable);
