@@ -2,6 +2,7 @@ package com.github.ik024.calendar_lib.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ismail.khan2 on 3/18/2016.
@@ -26,10 +28,13 @@ public class MonthGridAdapter extends BaseAdapter {
     LayoutInflater mInflater;
 
     List<String> mItemList = Collections.EMPTY_LIST;
-    List<Date> mEventList = Collections.EMPTY_LIST;
+    Map<Date,EventInfo> mEventList = Collections.EMPTY_MAP;
     int mToday, mMonth, mYear, mDisplayMonth, mDisplayYear;
     int mCurrentDayTextColor, mDaysOfMonthTextColor, mDaysOfWeekTextColor, mMonthNameTextColor;
     boolean mIsMonthView = true;
+
+    final int minTextSizeMonthView = 25;
+    final int minTextSizeYearView = 18;
 
     public MonthGridAdapter(Context context, int year, int month, int today){
         mContext = context;
@@ -132,11 +137,11 @@ public class MonthGridAdapter extends BaseAdapter {
                     mHolder.tvCalendarMonthDay.setTextColor(mCurrentDayTextColor);
                 }else{
                     Date date = getDate(mDisplayYear, mDisplayMonth, Integer.parseInt(item));
-                    if(mEventList.contains(date)){
-                        // GradientDrawable gd = (GradientDrawable) mHolder.tvCalendarMonthDay.getBackground().getCurrent();
-                        // gd.setColor(Color.parseColor("#000000"));
-                        mHolder.tvCalendarMonthDay.setBackgroundResource(R.drawable.textview_background_event);
-                        mHolder.tvCalendarMonthDay.setTextColor(Color.WHITE);
+                    if(mEventList.containsKey(date)){
+                        EventInfo info = mEventList.get(date);
+                        mHolder.tvCalendarMonthDay.setBackgroundColor(info.getEventBackgroundColor());
+                        // mHolder.tvCalendarMonthDay.setBackgroundResource(R.drawable.textview_background_event);
+                        mHolder.tvCalendarMonthDay.setTextColor(info.getEventTextColor());
                     }else{
                         mHolder.tvCalendarMonthDay.setBackgroundResource(R.drawable.textview_background_no_event);
                         mHolder.tvCalendarMonthDay.setTextColor(mDaysOfMonthTextColor);
@@ -177,7 +182,7 @@ public class MonthGridAdapter extends BaseAdapter {
      *
      * @param eventList List of dates
      */
-    public void setEventList(List<Date> eventList){
+    public void setEventList(Map<Date,EventInfo> eventList){
         mEventList = eventList;
         notifyDataSetChanged();
     }
@@ -186,18 +191,8 @@ public class MonthGridAdapter extends BaseAdapter {
      * This method returns unmodifiable list reference
      * to the event list for the calendar
      */
-    public List<Date> getEventList() {
-        return Collections.unmodifiableList(mEventList);
-    }
-
-    /**
-     * This method extends the event list with new events
-     *
-     * @param eventList List of dates
-     */
-    public void extendEventList(List<Date> eventList){
-        mEventList.addAll(eventList);
-        notifyDataSetChanged();
+    public Map<Date,EventInfo> getEventList() {
+        return Collections.unmodifiableMap(mEventList);
     }
 
     /**
@@ -255,11 +250,11 @@ public class MonthGridAdapter extends BaseAdapter {
             tvCalendarWeekDayName = (AutoResizeTextView) view.findViewById(R.id.row_cm_tv_week_day_name);
             tvCalendarMonthDay = (AutoResizeTextView) view.findViewById(R.id.row_cm_tv_day);
             if(isMonthView){
-                tvCalendarMonthDay.setMinTextSize(25);
-                tvCalendarWeekDayName.setMinTextSize(25);
+                tvCalendarMonthDay.setMinTextSize(minTextSizeMonthView);
+                tvCalendarWeekDayName.setMinTextSize(minTextSizeMonthView);
             }else{
-                tvCalendarMonthDay.setMinTextSize(15);
-                tvCalendarWeekDayName.setMinTextSize(15);
+                tvCalendarMonthDay.setMinTextSize(minTextSizeYearView);
+                tvCalendarWeekDayName.setMinTextSize(minTextSizeYearView);
             }
         }
     }

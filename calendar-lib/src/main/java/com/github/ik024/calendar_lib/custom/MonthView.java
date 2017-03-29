@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.github.ik024.calendar_lib.adapters.EventInfo;
 import com.github.ik024.calendar_lib.listeners.MonthViewClickListeners;
 import com.github.ik024.calendar_lib.adapters.MonthGridAdapter;
 import com.github.ik024.calendar_lib.R;
@@ -21,6 +22,7 @@ import com.github.ik024.calendar_lib.R;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ismail.khan2 on 4/22/2016.
@@ -196,7 +198,7 @@ public class MonthView extends LinearLayout {
         }
     }
 
-    public void setEventList(List<Date> eventList) {
+    public void setEventList(Map<Date,EventInfo> eventList) {
         mMonthGridAdapter.setEventList(eventList);
     }
 

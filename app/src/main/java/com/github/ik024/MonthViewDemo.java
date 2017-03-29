@@ -1,17 +1,21 @@
 package com.github.ik024;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import com.github.ik024.calendar_lib.adapters.EventInfo;
 import com.github.ik024.calendar_lib.listeners.MonthViewClickListeners;
 import com.github.ik024.calendar_lib.custom.MonthView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MonthViewDemo extends AppCompatActivity implements MonthViewClickListeners {
 
@@ -32,7 +36,7 @@ public class MonthViewDemo extends AppCompatActivity implements MonthViewClickLi
         monthView.registerClickListener(this);
 
         //creating list of events
-        List<Date> eventList = getEventList();
+        Map<Date,EventInfo> eventList = getEventList();
 
         //adding events to the calendar
         monthView.setEventList(eventList);
@@ -44,13 +48,13 @@ public class MonthViewDemo extends AppCompatActivity implements MonthViewClickLi
         Toast.makeText(this, "date: "+dateClicked.toString(), Toast.LENGTH_LONG).show();
     }
 
-    private List<Date> getEventList(){
+    private Map<Date,EventInfo> getEventList(){
         //generating dummy event list
-        List<Date> eventList = new ArrayList<>();
-        eventList.add(getDate(2016, 4, 9));
-        eventList.add(getDate(2016, 4, 11));
-        eventList.add(getDate(2016, 4, 13));
-        eventList.add(getDate(2016, 4, 15));
+        Map<Date,EventInfo> eventList = new HashMap<>();
+        eventList.put(getDate(2017, 3, 9), new EventInfo(Color.RED, Color.WHITE));
+        eventList.put(getDate(2017, 3, 11), new EventInfo(Color.GREEN, Color.WHITE));
+        eventList.put(getDate(2017, 3, 13), new EventInfo(Color.BLUE, Color.WHITE));
+        eventList.put(getDate(2017, 3, 15), new EventInfo(Color.BLUE, Color.WHITE));
 
         return eventList;
     }
